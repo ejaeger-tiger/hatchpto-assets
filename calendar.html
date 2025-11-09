@@ -9,6 +9,10 @@
     margin: 0;
     padding: 0;
     background: transparent;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    -webkit-overflow-scrolling: touch;
   }
 
   .calendar-wrapper {
@@ -16,32 +20,41 @@
     border: 0;
     border-radius: 6px;
     overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+  }
+
+  .calendar-wrapper iframe {
+    width: 100%;
+    border: 0;
   }
 
   /* Desktop default */
-  @media (min-width: 801px) {
+  @media (min-width: 1025px) {
     .calendar-wrapper iframe {
-      height: 800px;
-      width: 100%;
-      border: 0;
+      height: 850px;
     }
   }
 
-  /* Tablet */
-  @media (max-width: 800px) and (min-width: 501px) {
+  /* Laptop / Tablet Landscape */
+  @media (min-width: 801px) and (max-width: 1024px) {
     .calendar-wrapper iframe {
       height: 1000px;
-      width: 100%;
-      border: 0;
     }
   }
 
-  /* Mobile */
+  /* Tablet Portrait */
+  @media (min-width: 501px) and (max-width: 800px) {
+    .calendar-wrapper iframe {
+      height: 1200px;
+    }
+  }
+
+  /* Mobile (iPhone, Android, small tablets) */
   @media (max-width: 500px) {
     .calendar-wrapper iframe {
-      height: 1400px;
-      width: 100%;
-      border: 0;
+      height: 1800px; /* increased for better scroll space */
     }
   }
 </style>
@@ -51,8 +64,9 @@
     <iframe
       src="https://calendar.google.com/calendar/embed?title=Hatch%20PTO%20Events&showPrint=0&showCalendars=0&mode=AGENDA&wkst=1&bgcolor=%23FF9933&src=c_fd9027fccf91047ead43f24a13e9ac8610ca34de98ce0aae9ec7cfe89173d4dc%40group.calendar.google.com&color=%238C500B&src=en.usa%23holiday%40group.v.calendar.google.com&color=%23125A12&ctz=America%2FChicago"
       allowfullscreen
-      scrolling="no"
-      frameborder="0">
+      frameborder="0"
+      loading="lazy"
+      style="display:block; width:100%;">
     </iframe>
   </div>
 </body>
