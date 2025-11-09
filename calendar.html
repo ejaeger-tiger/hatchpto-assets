@@ -47,14 +47,14 @@
   /* Tablet Portrait */
   @media (min-width: 501px) and (max-width: 800px) {
     .calendar-wrapper iframe {
-      height: 1200px;
+      height: 1600px; /* more vertical room for small tablets */
     }
   }
 
   /* Mobile (iPhone, Android, small tablets) */
   @media (max-width: 500px) {
     .calendar-wrapper iframe {
-      height: 1800px; /* increased for better scroll space */
+      height: 2200px; /* increased from 1800 → 2200 for better view on phones */
     }
   }
 </style>
