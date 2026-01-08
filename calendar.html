@@ -11,50 +11,46 @@
     background: transparent;
     width: 100%;
     height: 100%;
-    overflow: hidden;
+    overflow: auto; /* Changed from hidden to auto */
     -webkit-overflow-scrolling: touch;
   }
-
   .calendar-wrapper {
     width: 100%;
     border: 0;
     border-radius: 6px;
-    overflow: hidden;
+    overflow: visible; /* Changed from hidden */
     display: flex;
     justify-content: center;
     align-items: stretch;
+    min-height: 100vh;
   }
-
   .calendar-wrapper iframe {
     width: 100%;
     border: 0;
+    display: block;
   }
-
   /* Desktop default */
   @media (min-width: 1025px) {
     .calendar-wrapper iframe {
       height: 850px;
     }
   }
-
   /* Laptop / Tablet Landscape */
   @media (min-width: 801px) and (max-width: 1024px) {
     .calendar-wrapper iframe {
       height: 1000px;
     }
   }
-
   /* Tablet Portrait */
   @media (min-width: 501px) and (max-width: 800px) {
     .calendar-wrapper iframe {
-      height: 1600px; /* more vertical room for small tablets */
+      height: 1600px;
     }
   }
-
   /* Mobile (iPhone, Android, small tablets) */
   @media (max-width: 500px) {
     .calendar-wrapper iframe {
-      height: 2200px; /* increased from 1800 → 2200 for better view on phones */
+      height: 2200px;
     }
   }
 </style>
@@ -66,6 +62,7 @@
       allowfullscreen
       frameborder="0"
       loading="lazy"
+      scrolling="yes"
       style="display:block; width:100%;">
     </iframe>
   </div>
