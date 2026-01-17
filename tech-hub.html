@@ -332,26 +332,8 @@
             transform: translateY(-3px);
         }
 
-        /* Initial states for GSAP animations */
-        .header h1, .header p {
-            opacity: 0;
-        }
-
-        .intro h2, .intro p {
-            opacity: 0;
-        }
-
-        .resource-card {
-            opacity: 0;
-        }
-
-        .info-card {
-            opacity: 0;
-        }
-
-        .cta-section {
-            opacity: 0;
-        }
+        /* CONTENT IS VISIBLE BY DEFAULT - NO opacity: 0 here! */
+        /* GSAP will set opacity: 0 when it's ready to animate */
 
         @media (max-width: 768px) {
             .header h1 {
@@ -450,7 +432,7 @@
             <p>
                 In today's connected world, digital safety is just as important as teaching our children to look both
                 ways before
-                crossing the street. The Hatch PTO has created three comprehensive guides to help families make informed
+                crossing the street. The Hatch PTO has created four comprehensive guides to help families make informed
                 decisions and stay safe online.
             </p>
             <p>
@@ -595,7 +577,10 @@
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
 
     <script>
-        // Check for reduced motion preference - ACCESSIBILITY FIRST
+        // PROGRESSIVE ENHANCEMENT APPROACH
+        // Content is visible by default, GSAP adds polish if available
+
+        // Check for reduced motion preference
         const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
         const isMobile = window.innerWidth < 768;
 
@@ -606,61 +591,74 @@
             slow: isMobile ? 0.5 : 0.8
         };
 
-        // Initialize GSAP animations after DOM loads
-        window.addEventListener('DOMContentLoaded', () => {
-            if (!prefersReducedMotion) {
+        // Try to run animations after DOM and GSAP load
+        function initAnimations() {
+            // Check if GSAP loaded successfully
+            if (typeof gsap === 'undefined') {
+                console.log('GSAP not loaded - content remains visible without animations');
+                return;
+            }
+
+            if (prefersReducedMotion) {
+                console.log('User prefers reduced motion - skipping animations');
+                return;
+            }
+
+            try {
                 gsap.registerPlugin(ScrollTrigger);
 
+                // Set initial hidden state NOW (before animations)
+                gsap.set(['.header h1', '.header p', '.intro h2', '.intro p', '.resource-card', '.resource-card-icon', '.info-card', '.cta-section'], {
+                    opacity: 0
+                });
+
                 // === HEADER ANIMATIONS ===
-                // Animate header title
-                gsap.from('.header h1', {
-                    opacity: 0,
-                    y: -30,
+                gsap.to('.header h1', {
+                    opacity: 1,
+                    y: 0,
                     duration: duration.normal,
                     ease: 'power2.out'
                 });
 
-                // Animate header description
-                gsap.from('.header p', {
-                    opacity: 0,
-                    y: 20,
+                gsap.to('.header p', {
+                    opacity: 1,
+                    y: 0,
                     duration: duration.normal,
                     delay: 0.2,
                     ease: 'power2.out'
                 });
 
                 // === INTRO SECTION ===
-                gsap.from('.intro h2', {
-                    opacity: 0,
-                    y: 20,
+                gsap.to('.intro h2', {
+                    opacity: 1,
+                    y: 0,
                     duration: duration.normal,
                     delay: 0.4,
                     ease: 'power2.out'
                 });
 
-                gsap.from('.intro p', {
-                    opacity: 0,
-                    y: 15,
+                gsap.to('.intro p', {
+                    opacity: 1,
+                    y: 0,
                     duration: duration.normal,
                     delay: 0.5,
                     stagger: 0.1,
                     ease: 'power2.out'
                 });
 
-                // === RESOURCE CARDS - Main attraction ===
-                // Cards slide up with stagger
-                gsap.from('.resource-card', {
-                    opacity: 0,
-                    y: 40,
+                // === RESOURCE CARDS ===
+                gsap.to('.resource-card', {
+                    opacity: 1,
+                    y: 0,
                     duration: duration.normal,
                     delay: 0.7,
                     stagger: isMobile ? 0.1 : 0.15,
                     ease: 'power2.out'
                 });
 
-                // Icons scale in with bounce effect - appears after cards
-                gsap.from('.resource-card-icon', {
-                    scale: 0,
+                gsap.to('.resource-card-icon', {
+                    opacity: 1,
+                    scale: 1,
                     duration: duration.fast,
                     delay: 1.0,
                     stagger: isMobile ? 0.1 : 0.15,
@@ -668,9 +666,9 @@
                 });
 
                 // === INFO CARDS - Scroll triggered ===
-                gsap.from('.info-card', {
-                    opacity: 0,
-                    y: 30,
+                gsap.to('.info-card', {
+                    opacity: 1,
+                    y: 0,
                     duration: duration.normal,
                     stagger: 0.15,
                     ease: 'power2.out',
@@ -682,9 +680,9 @@
                 });
 
                 // === CTA SECTION - Scroll triggered ===
-                gsap.from('.cta-section', {
-                    opacity: 0,
-                    scale: 0.95,
+                gsap.to('.cta-section', {
+                    opacity: 1,
+                    scale: 1,
                     duration: duration.slow,
                     ease: 'power2.out',
                     scrollTrigger: {
@@ -694,66 +692,66 @@
                     }
                 });
 
-                // === BACK TO TOP BUTTON - Enhanced animation ===
-                const backToTopBtn = document.getElementById('backToTop');
-                
-                window.addEventListener('scroll', () => {
-                    if (window.pageYOffset > 300) {
-                        backToTopBtn.classList.add('show');
-                    } else {
-                        backToTopBtn.classList.remove('show');
-                    }
-                });
+                console.log('GSAP animations initialized successfully');
 
-                backToTopBtn.addEventListener('click', () => {
-                    gsap.to(window, {
-                        duration: 0.8,
-                        scrollTo: { y: 0, autoKill: false },
-                        ease: 'power2.inOut'
-                    });
-                });
-
-            } else {
-                // If user prefers reduced motion, immediately show all elements
-                gsap.set(['.header h1', '.header p', '.intro h2', '.intro p', '.resource-card', '.info-card', '.cta-section'], {
-                    opacity: 1
+            } catch (error) {
+                console.error('GSAP animation error:', error);
+                // If animations fail, make sure content is visible
+                document.querySelectorAll('.header h1, .header p, .intro h2, .intro p, .resource-card, .resource-card-icon, .info-card, .cta-section').forEach(el => {
+                    el.style.opacity = '1';
                 });
             }
+        }
 
-            // Smooth scroll for anchor links (non-GSAP fallback)
-            document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-                anchor.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    const target = document.querySelector(anchor.getAttribute('href'));
-                    if (target) {
-                        if (!prefersReducedMotion && typeof gsap !== 'undefined') {
-                            gsap.to(window, {
-                                duration: 0.6,
-                                scrollTo: { y: target, autoKill: false },
-                                ease: 'power2.inOut'
-                            });
-                        } else {
-                            target.scrollIntoView({ behavior: 'smooth' });
-                        }
-                    }
-                });
+        // Initialize animations after DOM loads
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', () => {
+                setTimeout(initAnimations, 100); // Small delay to ensure GSAP loads
             });
+        } else {
+            setTimeout(initAnimations, 100);
+        }
 
-            // Back to top button without GSAP fallback
-            if (prefersReducedMotion) {
-                const btn = document.getElementById('backToTop');
-                btn.addEventListener('click', () => {
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                });
-
-                window.addEventListener('scroll', () => {
-                    if (window.pageYOffset > 300) {
-                        btn.classList.add('show');
-                    } else {
-                        btn.classList.remove('show');
-                    }
-                });
+        // === BACK TO TOP BUTTON ===
+        const backToTopBtn = document.getElementById('backToTop');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopBtn.classList.add('show');
+            } else {
+                backToTopBtn.classList.remove('show');
             }
+        });
+
+        backToTopBtn.addEventListener('click', () => {
+            if (typeof gsap !== 'undefined') {
+                gsap.to(window, {
+                    duration: 0.8,
+                    scrollTo: { y: 0, autoKill: false },
+                    ease: 'power2.inOut'
+                });
+            } else {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        });
+
+        // === SMOOTH SCROLL FOR ANCHOR LINKS ===
+        document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+            anchor.addEventListener('click', (e) => {
+                e.preventDefault();
+                const target = document.querySelector(anchor.getAttribute('href'));
+                if (target) {
+                    if (typeof gsap !== 'undefined') {
+                        gsap.to(window, {
+                            duration: 0.6,
+                            scrollTo: { y: target, autoKill: false },
+                            ease: 'power2.inOut'
+                        });
+                    } else {
+                        target.scrollIntoView({ behavior: 'smooth' });
+                    }
+                }
+            });
         });
 
         // Performance optimization: Refresh ScrollTrigger on resize (debounced)
