@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description"
+        content="Hatch Elementary PTO's comprehensive digital safety resources for families - guides on first phones, cyber security, and online safety." />
+    <title>Family Tech Hub | Hatch Elementary PTO</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --hatch-orange: #FF6B35;
+            --hatch-brown: #5C4742;
+            --dark-gray: #2D2D2D;
+            --light-gray: #F5F5F5;
+            --border-gray: #E0E0E0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--dark-gray);
+            background: #fff;
+            overflow-x: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--hatch-orange) 0%, var(--hatch-brown) 100%);
+            color: #fff;
+            padding: 4rem 1.5rem;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .header h1 {
+            font-size: 2.75rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+
+        .header h1 i {
+            font-size: 2.5rem;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.95;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 1.5rem;
+        }
+
+        .intro {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .intro h2 {
+            color: var(--hatch-brown);
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .intro p {
+            font-size: 1.1rem;
+            color: var(--dark-gray);
+            max-width: 800px;
+            margin: 0 auto 0.75rem;
+        }
+
+        .resource-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            margin: 3rem 0;
+            align-items: stretch;
+        }
+
+        @media (min-width: 768px) {
+            .resource-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 1200px) {
+            .resource-grid {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 1.5rem;
+            }
+        }
+
+        .resource-card {
+            background: #fff;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border-top: 5px solid var(--hatch-orange);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .resource-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--hatch-orange), var(--hatch-brown));
+        }
+
+        .resource-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(255, 107, 53, 0.2);
+        }
+
+        .resource-card-icon {
+            font-size: 3.5rem;
+            color: var(--hatch-orange);
+            margin-bottom: 1.25rem;
+            display: block;
+        }
+
+        .resource-card h3 {
+            color: var(--hatch-brown);
+            font-size: 1.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .resource-card p {
+            color: var(--dark-gray);
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+
+        .resource-card ul {
+            list-style: none;
+            margin-bottom: 1.5rem;
+        }
+
+        .resource-card ul li {
+            padding: 0.5rem 0;
+            color: var(--dark-gray);
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .resource-card ul li i {
+            color: var(--hatch-orange);
+            margin-right: 0.75rem;
+            margin-top: 0.25rem;
+            flex-shrink: 0;
+        }
+
+        .resource-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--hatch-orange), var(--hatch-brown));
+            color: #fff;
+            padding: 0.875rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-top: auto;
+        }
+
+        .resource-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(255, 107, 53, 0.3);
+        }
+
+        .resource-btn i {
+            margin-left: 0.5rem;
+        }
+
+        .cta-section {
+            background: linear-gradient(135deg, var(--hatch-orange) 0%, var(--hatch-brown) 100%);
+            border-radius: 12px;
+            padding: 3rem 2rem;
+            text-align: center;
+            color: #fff;
+            margin: 1rem 0;
+            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.2);
+        }
+
+        .cta-section h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .cta-section p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            background: #fff;
+            color: var(--hatch-brown);
+            padding: 0.875rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            background: var(--light-gray);
+        }
+
+        .cta-btn i {
+            margin-right: 0.5rem;
+        }
+
+        .info-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin: 3rem 0;
+        }
+
+        .info-card {
+            background: var(--light-gray);
+            border-radius: 8px;
+            padding: 1.5rem;
+            border-left: 4px solid var(--hatch-orange);
+        }
+
+        .info-card h4 {
+            color: var(--hatch-brown);
+            font-size: 1.2rem;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .info-card h4 i {
+            margin-right: 0.5rem;
+            color: var(--hatch-orange);
+        }
+
+        .info-card p {
+            color: var(--dark-gray);
+            font-size: 0.95rem;
+        }
+
+        .tech-hub-attribution {
+            background: linear-gradient(135deg, var(--hatch-brown) 0%, var(--dark-gray) 100%);
+            color: #fff;
+            text-align: center;
+            padding: 2rem 1.5rem;
+            margin-top: 0rem;
+        }
+
+        .tech-hub-attribution p {
+            margin: 0.5rem 0;
+        }
+
+        .tech-hub-attribution a {
+            color: var(--hatch-orange);
+            text-decoration: none;
+        }
+
+        .tech-hub-attribution a:hover {
+            text-decoration: underline;
+        }
+
+        #backToTop {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: var(--hatch-orange);
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 1.25rem;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        #backToTop.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        #backToTop:hover {
+            background: var(--hatch-brown);
+            transform: translateY(-3px);
+        }
+
+        /* Initial states for GSAP animations */
+        .header h1, .header p {
+            opacity: 0;
+        }
+
+        .intro h2, .intro p {
+            opacity: 0;
+        }
+
+        .resource-card {
+            opacity: 0;
+        }
+
+        .info-card {
+            opacity: 0;
+        }
+
+        .cta-section {
+            opacity: 0;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .header h1 i {
+                font-size: 1.75rem;
+            }
+
+            .header p {
+                font-size: 1rem;
+            }
+
+            .resource-card {
+                padding: 1.5rem;
+            }
+
+            .resource-card-icon {
+                font-size: 2.75rem;
+            }
+
+            .resource-card h3 {
+                font-size: 1.5rem;
+            }
+
+            .cta-section {
+                padding: 2rem 1.5rem;
+            }
+
+            .cta-section h2 {
+                font-size: 1.5rem;
+            }
+
+            .resource-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+        }
+
+        @media (min-width: 1200px) {
+            .resource-card {
+                padding: 1.15rem;
+            }
+
+            .resource-card-icon {
+                font-size: 2.4rem;
+                margin-bottom: 0.6rem;
+            }
+
+            .resource-card h3 {
+                font-size: 1.35rem;
+                margin-bottom: 0.5rem;
+                line-height: 1.2;
+            }
+
+            .resource-card p {
+                margin-bottom: 0.75rem;
+                line-height: 1.4;
+            }
+
+            .resource-card ul {
+                margin-bottom: 0.75rem;
+            }
+
+            .resource-card ul li {
+                padding: 0.18rem 0;
+                line-height: 1.25;
+                font-size: 0.95rem;
+            }
+
+            .resource-card ul li i {
+                margin-right: 0.55rem;
+                margin-top: 0.12rem;
+            }
+
+            .resource-btn {
+                padding: 0.7rem 1rem;
+                width: 100%;
+                text-align: center;
+                font-size: 0.95rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header">
+        <h1><i class="fas fa-shield-alt"></i>Family Tech Hub</h1>
+        <p>Comprehensive guides to help Hatch Elementary families navigate technology safely and confidently</p>
+    </header>
+
+    <div class="container">
+        <section class="intro">
+            <h2>Empowering Our Tiger Cubs in the Digital World</h2>
+            <p>
+                In today's connected world, digital safety is just as important as teaching our children to look both
+                ways before
+                crossing the street. The Hatch PTO has created three comprehensive guides to help families make informed
+                decisions and stay safe online.
+            </p>
+            <p>
+                Whether you're considering your child's first phone, strengthening your family's cyber security, or
+                teaching
+                digital safety skills, these resources are here to help.
+            </p>
+        </section>
+
+        <section class="resource-grid">
+            <article class="resource-card">
+                <i class="fas fa-mobile-alt resource-card-icon"></i>
+                <h3>First Phone Guide</h3>
+                <p>
+                    A practical roadmap to help families decide if their child is ready for a phone - and how to set it
+                    up safely
+                    with clear rules, healthy boundaries, and the right parental controls.
+                </p>
+                <ul>
+                    <li><i class="fas fa-check-circle"></i> Readiness checklist (age matters less than maturity)</li>
+                    <li><i class="fas fa-check-circle"></i> Phone options + a progressive "earn access" approach</li>
+                    <li><i class="fas fa-check-circle"></i> iPhone Screen Time + Android Family Link setup</li>
+                    <li><i class="fas fa-check-circle"></i> Family phone contract + expectations</li>
+                    <li><i class="fas fa-check-circle"></i> Red flags to watch + responsible use coaching</li>
+                </ul>
+                <a href="https://hatchpto.org/first-phone" class="resource-btn">
+                    View the First Phone Guide <i class="fas fa-arrow-right"></i>
+                </a>
+            </article>
+
+            <article class="resource-card">
+                <i class="fas fa-lock resource-card-icon"></i>
+                <h3>Cyber Security Guide</h3>
+                <p>
+                    A practical family guide to securing your accounts, spotting scams, and protecting your identity -
+                    without
+                    needing to be a tech expert.
+                </p>
+                <ul>
+                    <li><i class="fas fa-check-circle"></i> Strong passwords + the passphrase method</li>
+                    <li><i class="fas fa-check-circle"></i> Password managers (Bitwarden / 1Password)</li>
+                    <li><i class="fas fa-check-circle"></i> 2FA setup (best options + priority accounts)</li>
+                    <li><i class="fas fa-check-circle"></i> Phishing & scam red flags to watch for</li>
+                    <li><i class="fas fa-check-circle"></i> Device + Wi-Fi security best practices</li>
+                </ul>
+                <a href="https://hatchpto.org/cyber-security" class="resource-btn">
+                    View Cyber Security Guide <i class="fas fa-arrow-right"></i>
+                </a>
+            </article>
+
+            <article class="resource-card">
+                <i class="fas fa-user-shield resource-card-icon"></i>
+                <h3>Digital Safety Guide</h3>
+                <p>
+                    A practical, step-by-step guide to protect your kids online at home using DNS filtering, parental
+                    controls,
+                    and safer settings for YouTube, Roblox, and devices.
+                </p>
+                <ul>
+                    <li><i class="fas fa-check-circle"></i> Cloudflare "1.1.1.1 for Families" DNS protection</li>
+                    <li><i class="fas fa-check-circle"></i> Router-based parental controls & bedtime schedules</li>
+                    <li><i class="fas fa-check-circle"></i> YouTube Kids + supervised YouTube settings</li>
+                    <li><i class="fas fa-check-circle"></i> Roblox safety controls & chat restrictions</li>
+                    <li><i class="fas fa-check-circle"></i> Google Family Link + Apple Screen Time setup</li>
+                </ul>
+                <a href="https://hatchpto.org/digital-safety" class="resource-btn">
+                    View Digital Safety Guide <i class="fas fa-arrow-right"></i>
+                </a>
+            </article>
+
+            <article class="resource-card">
+                <i class="fas fa-users resource-card-icon"></i>
+                <h3>Social Media Guide</h3>
+                <p>
+                    A modern parent guide to social media: when kids are ready, which platforms matter most, how to turn
+                    on the
+                    right safety settings, and what warning signs to watch for.
+                </p>
+                <ul>
+                    <li><i class="fas fa-check-circle"></i> Readiness checklist: when (and if) to start</li>
+                    <li><i class="fas fa-check-circle"></i> Popular platforms explained (TikTok, Instagram, Snapchat,
+                        Discord)</li>
+                    <li><i class="fas fa-check-circle"></i> Safety settings: privacy, messaging, and content controls
+                    </li>
+                    <li><i class="fas fa-check-circle"></i> Family agreement + boundaries that actually work</li>
+                    <li><i class="fas fa-check-circle"></i> Warning signs + mental health red flags</li>
+                </ul>
+                <a href="https://hatchpto.org/social-media" class="resource-btn">
+                    View Social Media Guide <i class="fas fa-arrow-right"></i>
+                </a>
+            </article>
+        </section>
+
+        <section class="info-cards">
+            <div class="info-card">
+                <h4><i class="fas fa-lightbulb"></i> Expert-Backed Information</h4>
+                <p>Our guides are based on recommendations from CISA, FBI, FTC, Common Sense Media, and leading
+                    cybersecurity experts.</p>
+            </div>
+            <div class="info-card">
+                <h4><i class="fas fa-heart"></i> Created for Hatch Families</h4>
+                <p>These resources were developed specifically for our school community, with practical advice that fits
+                    real family situations.</p>
+            </div>
+            <div class="info-card">
+                <h4><i class="fas fa-sync"></i> Regularly Updated</h4>
+                <p>Technology changes quickly. We keep these guides current with the latest safety recommendations and
+                    tools.</p>
+            </div>
+        </section>
+
+        <section class="cta-section">
+            <h2><i class="fas fa-users"></i> Let's Work Together</h2>
+            <p>
+                Digital safety is a community effort. Share these resources with other families, bookmark them for
+                future
+                reference, and reach out if you have questions or suggestions.
+            </p>
+            <div class="cta-buttons">
+                <a href="javascript:window.print()" class="cta-btn"><i class="fas fa-print"></i> Print This Page</a>
+            </div>
+        </section>
+    </div>
+
+    <section class="tech-hub-attribution">
+        <p><strong>Hatch Elementary School PTO</strong></p>
+        <p>Protecting Our Tiger Cubs in the Digital World <i class="fas fa-shield-alt"></i></p>
+        <p style="font-size: 0.9rem; margin-top: 1rem;">
+            These resources were created with care for Hatch Elementary families using information from trusted sources
+            including CISA, FBI, FTC, Common Sense Media, and cybersecurity experts.
+        </p>
+        <p style="font-size: 0.9rem;">
+            Questions or suggestions? Contact us at <a href="mailto:ejaeger@hatchpto.org">ejaeger@hatchpto.org</a>
+        </p>
+        <p style="font-size: 0.85rem; margin-top: 1rem; opacity: 0.8;">Last Updated: January 2026</p>
+    </section>
+
+    <button id="backToTop"><i class="fas fa-chevron-up"></i></button>
+
+    <!-- GSAP Core + ScrollTrigger Plugin -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+
+    <script>
+        // Check for reduced motion preference - ACCESSIBILITY FIRST
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const isMobile = window.innerWidth < 768;
+
+        // Adjust animation durations based on device
+        const duration = {
+            fast: isMobile ? 0.3 : 0.4,
+            normal: isMobile ? 0.4 : 0.6,
+            slow: isMobile ? 0.5 : 0.8
+        };
+
+        // Initialize GSAP animations after DOM loads
+        window.addEventListener('DOMContentLoaded', () => {
+            if (!prefersReducedMotion) {
+                gsap.registerPlugin(ScrollTrigger);
+
+                // === HEADER ANIMATIONS ===
+                // Animate header title
+                gsap.from('.header h1', {
+                    opacity: 0,
+                    y: -30,
+                    duration: duration.normal,
+                    ease: 'power2.out'
+                });
+
+                // Animate header description
+                gsap.from('.header p', {
+                    opacity: 0,
+                    y: 20,
+                    duration: duration.normal,
+                    delay: 0.2,
+                    ease: 'power2.out'
+                });
+
+                // === INTRO SECTION ===
+                gsap.from('.intro h2', {
+                    opacity: 0,
+                    y: 20,
+                    duration: duration.normal,
+                    delay: 0.4,
+                    ease: 'power2.out'
+                });
+
+                gsap.from('.intro p', {
+                    opacity: 0,
+                    y: 15,
+                    duration: duration.normal,
+                    delay: 0.5,
+                    stagger: 0.1,
+                    ease: 'power2.out'
+                });
+
+                // === RESOURCE CARDS - Main attraction ===
+                // Cards slide up with stagger
+                gsap.from('.resource-card', {
+                    opacity: 0,
+                    y: 40,
+                    duration: duration.normal,
+                    delay: 0.7,
+                    stagger: isMobile ? 0.1 : 0.15,
+                    ease: 'power2.out'
+                });
+
+                // Icons scale in with bounce effect - appears after cards
+                gsap.from('.resource-card-icon', {
+                    scale: 0,
+                    duration: duration.fast,
+                    delay: 1.0,
+                    stagger: isMobile ? 0.1 : 0.15,
+                    ease: 'back.out(1.7)'
+                });
+
+                // === INFO CARDS - Scroll triggered ===
+                gsap.from('.info-card', {
+                    opacity: 0,
+                    y: 30,
+                    duration: duration.normal,
+                    stagger: 0.15,
+                    ease: 'power2.out',
+                    scrollTrigger: {
+                        trigger: '.info-cards',
+                        start: 'top 80%',
+                        toggleActions: 'play none none none'
+                    }
+                });
+
+                // === CTA SECTION - Scroll triggered ===
+                gsap.from('.cta-section', {
+                    opacity: 0,
+                    scale: 0.95,
+                    duration: duration.slow,
+                    ease: 'power2.out',
+                    scrollTrigger: {
+                        trigger: '.cta-section',
+                        start: 'top 75%',
+                        toggleActions: 'play none none none'
+                    }
+                });
+
+                // === BACK TO TOP BUTTON - Enhanced animation ===
+                const backToTopBtn = document.getElementById('backToTop');
+                
+                window.addEventListener('scroll', () => {
+                    if (window.pageYOffset > 300) {
+                        backToTopBtn.classList.add('show');
+                    } else {
+                        backToTopBtn.classList.remove('show');
+                    }
+                });
+
+                backToTopBtn.addEventListener('click', () => {
+                    gsap.to(window, {
+                        duration: 0.8,
+                        scrollTo: { y: 0, autoKill: false },
+                        ease: 'power2.inOut'
+                    });
+                });
+
+            } else {
+                // If user prefers reduced motion, immediately show all elements
+                gsap.set(['.header h1', '.header p', '.intro h2', '.intro p', '.resource-card', '.info-card', '.cta-section'], {
+                    opacity: 1
+                });
+            }
+
+            // Smooth scroll for anchor links (non-GSAP fallback)
+            document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+                anchor.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const target = document.querySelector(anchor.getAttribute('href'));
+                    if (target) {
+                        if (!prefersReducedMotion && typeof gsap !== 'undefined') {
+                            gsap.to(window, {
+                                duration: 0.6,
+                                scrollTo: { y: target, autoKill: false },
+                                ease: 'power2.inOut'
+                            });
+                        } else {
+                            target.scrollIntoView({ behavior: 'smooth' });
+                        }
+                    }
+                });
+            });
+
+            // Back to top button without GSAP fallback
+            if (prefersReducedMotion) {
+                const btn = document.getElementById('backToTop');
+                btn.addEventListener('click', () => {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+
+                window.addEventListener('scroll', () => {
+                    if (window.pageYOffset > 300) {
+                        btn.classList.add('show');
+                    } else {
+                        btn.classList.remove('show');
+                    }
+                });
+            }
+        });
+
+        // Performance optimization: Refresh ScrollTrigger on resize (debounced)
+        let resizeTimer;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(() => {
+                if (typeof ScrollTrigger !== 'undefined') {
+                    ScrollTrigger.refresh();
+                }
+            }, 250);
+        });
+    </script>
+</body>
+
+</html>
